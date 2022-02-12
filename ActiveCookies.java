@@ -14,19 +14,19 @@ public class ActiveCookies {
         String dir = args[0];
         String fileName = args[1];
         String timeZone = args[2];
-        String timeStamp = args[3];
-        commandLineTesting(timeZone, timeStamp);
+        String dateStamp = args[3];
+        commandLineTesting(timeZone,dateStamp);
         fileTest(fileName);
         LinkedHashMap<String, Integer> cookies = new LinkedHashMap<String, Integer>();
-        fileRead(fileName, timeStamp, cookies);
+        fileRead(fileName, dateStamp, cookies);
         ActiveCheck(cookies);
     }
     
     /* 
     fileRead function loops through the text file 
-    and adds the name and frequnecy into a hashmap
+    and adds the name and frequency into a hash map
     */
-    public static LinkedHashMap<String, Integer> fileRead(String fileName, String timeStamp,
+    public static LinkedHashMap<String, Integer> fileRead(String fileName, String dateStamp,
             LinkedHashMap<String, Integer> cookies) {
         try {
             File file = new File(fileName);
@@ -39,7 +39,7 @@ public class ActiveCookies {
                 int comma = data.indexOf(",");
                 String cookieName = data.substring(0, comma);
                 String cookieDate = data.substring(comma + 1, comma + 11);
-                if (cookieDate.equals(timeStamp)) {
+                if (cookieDate.equals(dateStamp)) {
                     if (cookies.containsKey(cookieName)) {
                         cookies.put(cookieName, cookies.get(cookieName) + 1);
                     } else {
@@ -81,9 +81,9 @@ public class ActiveCookies {
     
     @Test
     // commnadLineTesting function checks if command line arguments are properly written
-    public static void commandLineTesting(String timeZone, String timeStamp) {
+    public static void commandLineTesting(String timeZone, String dateStamp) {
     	Assertions.assertEquals(timeZone, "-d");
-		Assertions.assertEquals(timeStamp.length(), 10);
+		Assertions.assertEquals(dateStamp.length(), 10);
     }
     
     @Test 
